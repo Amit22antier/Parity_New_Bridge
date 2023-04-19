@@ -4780,13 +4780,13 @@ pub mod api {
 				pub finality_target: ::std::boxed::Box<
 					::sp_runtime::generic::Header<
 						::core::primitive::u64,
-						::bp_millau::BlakeTwoAndKeccak256,
+						::bp_millau::BlakeTwo256,
 					>,
 				>,
 				pub justification: ::bp_header_chain::justification::GrandpaJustification<
 					::sp_runtime::generic::Header<
 						::core::primitive::u64,
-						::bp_millau::BlakeTwoAndKeccak256,
+						::bp_millau::BlakeTwo256,
 					>,
 				>,
 			}
@@ -4797,7 +4797,7 @@ pub mod api {
 				pub init_data: ::bp_header_chain::InitializationData<
 					::sp_runtime::generic::Header<
 						::core::primitive::u64,
-						::bp_millau::BlakeTwoAndKeccak256,
+						::bp_millau::BlakeTwo256,
 					>,
 				>,
 			}
@@ -4826,12 +4826,12 @@ pub mod api {
 					&self,
 					finality_target: ::sp_runtime::generic::Header<
 						::core::primitive::u64,
-						::bp_millau::BlakeTwoAndKeccak256,
+						::bp_millau::BlakeTwo256,
 					>,
 					justification: ::bp_header_chain::justification::GrandpaJustification<
 						::sp_runtime::generic::Header<
 							::core::primitive::u64,
-							::bp_millau::BlakeTwoAndKeccak256,
+							::bp_millau::BlakeTwo256,
 						>,
 					>,
 				) -> ::subxt::tx::StaticTxPayload<SubmitFinalityProof> {
@@ -4864,7 +4864,7 @@ pub mod api {
 					init_data: ::bp_header_chain::InitializationData<
 						::sp_runtime::generic::Header<
 							::core::primitive::u64,
-							::bp_millau::BlakeTwoAndKeccak256,
+							::bp_millau::BlakeTwo256,
 						>,
 					>,
 				) -> ::subxt::tx::StaticTxPayload<Initialize> {
@@ -5287,7 +5287,7 @@ pub mod api {
 			pub struct ReceiveMessagesProof {
 				pub relayer_id_at_bridged_chain: ::sp_core::crypto::AccountId32,
 				pub proof: ::bridge_runtime_common::messages::target::FromBridgedChainMessagesProof<
-					::bp_millau::MillauHash,
+					::bp_millau::Hash,
 				>,
 				pub messages_count: ::core::primitive::u32,
 				pub dispatch_weight: ::sp_weights::Weight,
@@ -5295,7 +5295,7 @@ pub mod api {
 			#[derive(
 				:: subxt :: ext :: codec :: Decode, :: subxt :: ext :: codec :: Encode, Clone, Debug,
 			)]
-			pub struct ReceiveMessagesDeliveryProof { pub proof : :: bridge_runtime_common :: messages :: source :: FromBridgedChainMessagesDeliveryProof < :: bp_millau :: MillauHash > , pub relayers_state : :: bp_messages :: UnrewardedRelayersState , }
+			pub struct ReceiveMessagesDeliveryProof { pub proof : :: bridge_runtime_common :: messages :: source :: FromBridgedChainMessagesDeliveryProof < :: bp_millau :: Hash > , pub relayers_state : :: bp_messages :: UnrewardedRelayersState , }
 			pub struct TransactionApi;
 			impl TransactionApi {
 				#[doc = "Change `PalletOwner`."]
@@ -5345,7 +5345,7 @@ pub mod api {
 					&self,
 					relayer_id_at_bridged_chain: ::sp_core::crypto::AccountId32,
 					proof: ::bridge_runtime_common::messages::target::FromBridgedChainMessagesProof<
-						::bp_millau::MillauHash,
+						::bp_millau::Hash,
 					>,
 					messages_count: ::core::primitive::u32,
 					dispatch_weight: ::sp_weights::Weight,
@@ -5369,7 +5369,7 @@ pub mod api {
 				#[doc = "Receive messages delivery proof from bridged chain."]
 				pub fn receive_messages_delivery_proof(
 					&self,
-					proof : :: bridge_runtime_common :: messages :: source :: FromBridgedChainMessagesDeliveryProof < :: bp_millau :: MillauHash >,
+					proof : :: bridge_runtime_common :: messages :: source :: FromBridgedChainMessagesDeliveryProof < :: bp_millau :: Hash >,
 					relayers_state: ::bp_messages::UnrewardedRelayersState,
 				) -> ::subxt::tx::StaticTxPayload<ReceiveMessagesDeliveryProof> {
 					::subxt::tx::StaticTxPayload::new(
@@ -6944,13 +6944,13 @@ pub mod api {
 						finality_target: ::std::boxed::Box<
 							::sp_runtime::generic::Header<
 								::core::primitive::u64,
-								::bp_millau::BlakeTwoAndKeccak256,
+								::bp_millau::BlakeTwo256,
 							>,
 						>,
 						justification: ::bp_header_chain::justification::GrandpaJustification<
 							::sp_runtime::generic::Header<
 								::core::primitive::u64,
-								::bp_millau::BlakeTwoAndKeccak256,
+								::bp_millau::BlakeTwo256,
 							>,
 						>,
 					},
@@ -6968,7 +6968,7 @@ pub mod api {
 						init_data: ::bp_header_chain::InitializationData<
 							::sp_runtime::generic::Header<
 								::core::primitive::u64,
-								::bp_millau::BlakeTwoAndKeccak256,
+								::bp_millau::BlakeTwo256,
 							>,
 						>,
 					},
@@ -7053,10 +7053,10 @@ pub mod api {
 				)]
 				#[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
 				pub enum Call {
-					# [codec (index = 0)] # [doc = "Change `PalletOwner`."] # [doc = ""] # [doc = "May only be called either by root, or by `PalletOwner`."] set_owner { new_owner : :: core :: option :: Option < :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 1)] # [doc = "Halt or resume all/some pallet operations."] # [doc = ""] # [doc = "May only be called either by root, or by `PalletOwner`."] set_operating_mode { operating_mode : runtime_types :: bp_messages :: MessagesOperatingMode , } , # [codec (index = 2)] # [doc = "Receive messages proof from bridged chain."] # [doc = ""] # [doc = "The weight of the call assumes that the transaction always brings outbound lane"] # [doc = "state update. Because of that, the submitter (relayer) has no benefit of not including"] # [doc = "this data in the transaction, so reward confirmations lags should be minimal."] receive_messages_proof { relayer_id_at_bridged_chain : :: sp_core :: crypto :: AccountId32 , proof : :: bridge_runtime_common :: messages :: target :: FromBridgedChainMessagesProof < :: bp_millau :: MillauHash > , messages_count : :: core :: primitive :: u32 , dispatch_weight : :: sp_weights :: Weight , } , # [codec (index = 3)] # [doc = "Receive messages delivery proof from bridged chain."] receive_messages_delivery_proof { proof : :: bridge_runtime_common :: messages :: source :: FromBridgedChainMessagesDeliveryProof < :: bp_millau :: MillauHash > , relayers_state : :: bp_messages :: UnrewardedRelayersState , } , }
+					# [codec (index = 0)] # [doc = "Change `PalletOwner`."] # [doc = ""] # [doc = "May only be called either by root, or by `PalletOwner`."] set_owner { new_owner : :: core :: option :: Option < :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 1)] # [doc = "Halt or resume all/some pallet operations."] # [doc = ""] # [doc = "May only be called either by root, or by `PalletOwner`."] set_operating_mode { operating_mode : runtime_types :: bp_messages :: MessagesOperatingMode , } , # [codec (index = 2)] # [doc = "Receive messages proof from bridged chain."] # [doc = ""] # [doc = "The weight of the call assumes that the transaction always brings outbound lane"] # [doc = "state update. Because of that, the submitter (relayer) has no benefit of not including"] # [doc = "this data in the transaction, so reward confirmations lags should be minimal."] receive_messages_proof { relayer_id_at_bridged_chain : :: sp_core :: crypto :: AccountId32 , proof : :: bridge_runtime_common :: messages :: target :: FromBridgedChainMessagesProof < :: bp_millau :: Hash > , messages_count : :: core :: primitive :: u32 , dispatch_weight : :: sp_weights :: Weight , } , # [codec (index = 3)] # [doc = "Receive messages delivery proof from bridged chain."] receive_messages_delivery_proof { proof : :: bridge_runtime_common :: messages :: source :: FromBridgedChainMessagesDeliveryProof < :: bp_millau :: Hash > , relayers_state : :: bp_messages :: UnrewardedRelayersState , } , }
 				#[derive(
 					:: subxt :: ext :: codec :: Decode,
-					:: subxt :: ext :: codec :: Encode,
+					:: subxt :: ext :: codec :: Encode,	
 					Clone,
 					Debug,
 				)]

@@ -119,7 +119,7 @@ fn main() -> color_eyre::Result<()> {
 	type_substitutes.extend(
 		vec![
 			TypeSubstitute::simple("sp_core::crypto::AccountId32"),
-			TypeSubstitute::custom("bp_millau::millau_hash::MillauHash", "::bp_millau::MillauHash"),
+			TypeSubstitute::custom("bp_millau::millau_hash::MillauHash2", "::bp_millau::MillauHash22"),
 			TypeSubstitute::simple("bp_millau::BlakeTwoAndKeccak256"),
 			TypeSubstitute::custom(
 				"sp_runtime::generic::digest::Digest",
